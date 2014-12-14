@@ -172,12 +172,11 @@ public class XPackageManager extends XHook {
 				if (uid == Binder.getCallingUid())
 					return;
 
-				String packageName = (String) param.args[0];
-
 				// Prevent recursion
+				String packageName = (String) param.args[0];
 				if (!XPackageManager.class.getPackage().getName().equals(packageName))
 					if (isRestrictedExtra(param, packageName))
-						if (!isPackageAllowed(packageName))
+						if (!isPackageAllowed(uid, packageName))
 							param.setResult(null);
 			}
 			break;
@@ -348,7 +347,7 @@ public class XPackageManager extends XHook {
 	private List<ApplicationInfo> filterApplicationInfo(List<ApplicationInfo> original) {
 		ArrayList<ApplicationInfo> result = new ArrayList<ApplicationInfo>();
 		for (ApplicationInfo appInfo : original)
-			if (isPackageAllowed(appInfo.packageName))
+			if (isPackageAllowed(appInfo.uid, appInfo.packageName))
 				result.add(appInfo);
 		return result;
 	}
@@ -356,7 +355,7 @@ public class XPackageManager extends XHook {
 	private List<PackageInfo> filterPackageInfo(List<PackageInfo> original) {
 		ArrayList<PackageInfo> result = new ArrayList<PackageInfo>();
 		for (PackageInfo pkgInfo : original)
-			if (isPackageAllowed(pkgInfo.packageName))
+			if (isPackageAllowed(pkgInfo.applicationInfo == null ? 0 : pkgInfo.applicationInfo.uid, pkgInfo.packageName))
 				result.add(pkgInfo);
 		return result;
 	}
@@ -364,7 +363,8 @@ public class XPackageManager extends XHook {
 	private List<ProviderInfo> filterProviderInfo(List<ProviderInfo> original) {
 		ArrayList<ProviderInfo> result = new ArrayList<ProviderInfo>();
 		for (ProviderInfo provInfo : original)
-			if (isPackageAllowed(provInfo.packageName))
+			if (isPackageAllowed(provInfo.applicationInfo == null ? 0 : provInfo.applicationInfo.uid,
+					provInfo.packageName))
 				result.add(provInfo);
 		return result;
 	}
@@ -373,13 +373,15 @@ public class XPackageManager extends XHook {
 		ArrayList<ResolveInfo> result = new ArrayList<ResolveInfo>();
 		for (ResolveInfo resInfo : original)
 			if (resInfo.activityInfo != null && resInfo.activityInfo.applicationInfo != null)
-				if (isPackageAllowed(resInfo.activityInfo.applicationInfo.packageName))
+				if (isPackageAllowed(resInfo.activityInfo.applicationInfo.uid,
+						resInfo.activityInfo.applicationInfo.packageName))
 					result.add(resInfo);
 		return result;
 	}
 
-	public static boolean isPackageAllowed(String packageName) {
-		int uid = Binder.getCallingUid();
+	public static boolean isPackageAllowed(int uid, String packageName) {
+		if (uid == Binder.getCallingUid())
+			return true;
 
 		if (packageName == null) {
 			Util.log(null, Log.WARN, "isPackageAllowed uid=" + uid + " package=" + packageName);

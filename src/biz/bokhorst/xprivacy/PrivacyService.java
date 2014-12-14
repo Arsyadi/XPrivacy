@@ -82,7 +82,7 @@ public class PrivacyService extends IPrivacyService.Stub {
 	private static final String cTableUsage = "usage";
 	private static final String cTableSetting = "setting";
 
-	private static final int cCurrentVersion = 453;
+	private static final int cCurrentVersion = 455;
 	private static final String cServiceName = "xprivacy453";
 
 	private boolean mCorrupt = false;
@@ -2191,7 +2191,6 @@ public class PrivacyService extends IPrivacyService.Stub {
 
 		if (mNotified)
 			return;
-		mNotified = true;
 
 		Context context = getContext();
 		if (context == null)
@@ -2216,6 +2215,8 @@ public class PrivacyService extends IPrivacyService.Stub {
 
 			// Display notification
 			notificationManager.notify(Util.NOTIFY_CORRUPT, notification);
+
+			mNotified = true;
 		} catch (Throwable exex) {
 			Util.bug(null, exex);
 		}
