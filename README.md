@@ -78,15 +78,11 @@ Root access is needed to install the Xposed framework.
 
 **XPrivacy was a lot of work, so please support this project**
 
-Donate a few dollars for the [pro version](http://www.xprivacy.eu/)
+Donate a few dollars for a [pro license](http://www.xprivacy.eu/)
 
 OR
 
-buy [the pro enabler](https://play.google.com/store/apps/details?id=biz.bokhorst.xprivacy.pro) from Google Play Store
-
-OR
-
-[![Flattr](http://api.flattr.com/button/flattr-badge-large.png "Flattr This!")](http://flattr.com/thing/1491130/ "The ultimate, yet easy to use, privacy manager")
+buy the [pro license fetcher](https://play.google.com/store/apps/details?id=biz.bokhorst.xprivacy.license) from the Google Play Store
 
 
 **Using XPrivacy is entirely at your own risk**
@@ -182,6 +178,7 @@ For easy usage, data is restricted by category:
 	* return file not found for /sys/class/.../cid
 	* return a fake input device descriptor
 	* return a fake USB id/name/number
+	* return a fake Cast device ID / IP address
 <a name="internet"></a>
 * Internet
 	* revoke permission to internet access
@@ -346,7 +343,7 @@ Limitations
 	* The Android ID is salted with the serial number and MD5 hashed before communicating with the crowd sourced restrictions server
 	* This means that the crowd sourced restrictions server never gets the serial number nor the Android ID
 * You cannot restrict *IPC* because it is needed for internal checks
-* You cannot restrict *Storage* because it is needed to read the XPrivacy Pro license file
+* You cannot restrict *Storage* because it is needed to read the pro license file
 * You cannot restrict *System* because it is needed to get an application list
 * You cannot restrict *View* because it is needed to open links to the [crowd sourced restrictions](http://crowd.xprivacy.eu/)
 
@@ -503,7 +500,7 @@ XPrivacy asks for the following Android permissions:
 * Contacts: to be able to restrict applications' access to contacts
 * Boot: to be able to check if XPrivacy is enabled
 * Internet: to be able to submit and fetch [crowd sourced restrictions](http://crowd.xprivacy.eu/)
-* Storage: to be able to export XPrivacy's settings to the SD card (only [pro version](http://www.xprivacy.eu/))
+* Storage: to be able to export XPrivacy's settings to the SD card (only with a [pro license](http://www.xprivacy.eu/))
 * Wakelock: to keep the processor running during batch operations
 
 If desired, you can even restrict XPrivacy from accessing any of the above,
@@ -547,7 +544,7 @@ This is because database is no longer stored in the XPrivacy data folder, but in
 I have tried to store the database in the XPrivacy data folder, but this leads to all kinds of permission problems.
 
 The best practice is to use XPrivacy's export function (Main Menu > Export) to backup XPrivacy data,
-but please note that this requires the [pro version](http://www.xprivacy.eu/).
+but please note that this requires a [pro license](http://www.xprivacy.eu/).
 
 You can automate backups by sending an intent:
 
@@ -605,7 +602,7 @@ Assuming you don't wish to wipe data and that Xposed and XPrivacy are already in
 
 If you skip the export, clear, or import steps above, some system applications can end up with the wrong restrictions because the ROM update might have changed these applications' UID's.
 
-To import and export XPrivacy's data, you need the [pro version](http://www.xprivacy.eu/).
+To import and export XPrivacy's data, you need a [pro license](http://www.xprivacy.eu/).
 
 <a name="FAQ10"></a>
 **(10) Can I restrict root access?**
@@ -665,7 +662,7 @@ In the app details view, it will. In the main list view you are protected agains
 <a name="FAQ17"></a>
 **(17) How can I export/import my settings?**
 
-You need the [pro version](http://www.xprivacy.eu/) to import your settings. Exported settings are stored in the folder *.xprivacy* in the file *XPrivacy.xml*. You can copy this file to the same place on any other device. When importing, settings are only applied to user and system applications that actually exist on the other device.
+You need a [pro license](http://www.xprivacy.eu/) to import your settings. Exported settings are stored in the folder *.xprivacy* in the file *XPrivacy.xml*. You can copy this file to the same place on any other device. When importing, settings are only applied to user and system applications that actually exist on the other device.
 
 The export file will contain all restrictions and settings, but note that allowed accounts and contacts (not the accounts and contacts themselves) can only be imported when the Android ID is the same.
 
@@ -692,7 +689,7 @@ Each user has its own set of settings, so each user can define its own template 
 * Only the primary user can enable/disable debug logging
 * The primary user can see all usage data
 * Secondary users can only see their own usage data
-* The pro version needs to be activated for all users individually
+* The pro license needs to be activated for all users individually
 
 <a name="FAQ20"></a>
 **(20) Why is the "Settings > Fake data > Search" button disabled?**
@@ -784,9 +781,19 @@ The tri-state check box works this way:
 Note: by default, categories and functions are filtered by permission, so you may not see all of them. The check box state is independent of this.
 
 <a name="FAQ29"></a>
-**(29) Why doesn't the  pro enabler make all pro features available?**
+**(29) Why doesn't the import/export enabler make all pro features available?**
 
-The [pro enabler](https://play.google.com/store/apps/details?id=biz.bokhorst.xprivacy.pro) is in the Play Store by request of some early XPrivacy users. In the beginning, there was just one pro feature: export and import all restrictions and settings. Later, fetching [crowd sourced restrictions](http://crowd.xprivacy.eu/) was added as a pro feature. Processing the crowd sourced restrictions requires a big server that has to be paid for. The pro enabler's low price (don't forget Google takes 30%) prevented providing this feature for free. Looking back, I would never have added the pro enabler to the Play Store, but I can no longer remove it because of the existing users. Moreover, not everybody has access to PayPal and not everybody needs all pro features, so for these people the pro enabler is still of use.
+**The import/export enabler is not available anymore**
+
+The [import/export enabler](https://play.google.com/store/apps/details?id=biz.bokhorst.xprivacy.pro) is in the Play Store by request of some early XPrivacy users.
+In the beginning, there was just one pro feature: export and import all restrictions and settings.
+Later, fetching [crowd sourced restrictions](http://crowd.xprivacy.eu/) was added as a pro feature.
+Processing the crowd sourced restrictions requires a big server that has to be paid for.
+The import/export enabler's low price (don't forget Google takes 30%) prevented providing this feature for free.
+Looking back, I would never have added the import/export enabler to the Play Store,
+but I can no longer remove it because of the existing users.
+Moreover, not everybody has access to PayPal and not everybody needs all pro features,
+so for these people the import/export enabler is still of use.
 
 <a name="FAQ30"></a>
 **(30) What should I do if an application force closes (crashes) or something doesn't work?**
@@ -854,22 +861,21 @@ The same applies to the IMEI number, additionally complicated by legal issues in
 * Be aware that the on demand popups are global, which could be an issue if your device has multiple users. Unfortunately this cannot be changed.
 
 <a name="FAQ35"></a>
-**(35) Do I need the pro enabler to use the pro license?**
+**(35) Do I need the import/export enabler to use the pro license?**
 
 No, the pro license can be used independently.
 
 <a name="FAQ36"></a>
-**(36) Is PayPal or Bitcoin the only way to donate?**
+**(36) Is PayPal the only way to donate?**
 
 Yes, it is not feasible to add other donation methods at the moment.
-The only other way to get a pro license is to use the [XPrivacy Pro license fetcher](https://play.google.com/store/apps/details?id=biz.bokhorst.xprivacy.license).
+The only other way to get a pro license is to use the [pro license fetcher](https://play.google.com/store/apps/details?id=biz.bokhorst.xprivacy.license).
 
 <a name="FAQ37"></a>
 **(37) Do I need to have the Play store/services installed for the pro version?**
 
-Only for the pro enabler, not for the pro license.
-See [here](http://www.xprivacy.eu/) for the differences between the pro enabler and pro license.
-The [XPrivacy Pro license fetcher](https://play.google.com/store/apps/details?id=biz.bokhorst.xprivacy.license) needs the Play store/services for fetching a pro license, but not for using a pro license.
+Only for the pro license fetcher, not for a pro license acquired through a PayPal donation.
+The [pro license fetcher](https://play.google.com/store/apps/details?id=biz.bokhorst.xprivacy.license) needs the Play store/services for fetching a pro license, but not for using a pro license.
 
 <a name="FAQ38"></a>
 **(38) What does the update service do?**
@@ -1224,7 +1230,7 @@ should be accessible to almost everybody.
 [F-Droid](https://f-droid.org/) also doesn't allow me to sign the APK with my own signature.
 
 <a name="FAQ73"></a>
-**(73) Why is the minimum PayPal donation lower than the Pro license fetcher application price?**
+**(73) Why is the minimum PayPal donation lower than the pro license fetcher application price?**
 
 The Google transaction fee is 30%, while the PayPal transaction fee is 5-10%.
 
@@ -1247,23 +1253,14 @@ An example is Dolphin browser and its plugins/addons.
 **(75) Will XPrivacy work with ART?**
 
 XPrivacy will work if either [Xposed](http://forum.xda-developers.com/xposed/xposed-installer-versions-changelog-t2714053)
-or [Cydia Substrate](http://www.xda-developers.com/android/cydia-substrate-released-by-saurik-for-android/) is working.
+or a similar hooking framework is working.
 
 Xposed has no ART support currently.
 It is unknown to me if Cydia Substrate supports or will support ART.
 
 Android 5.0 (Lollipop) supports [ART](https://source.android.com/devices/tech/dalvik/art.html) only,
 which means that developing/testing XPrivacy for Android 5.0 can only be done
-if either Xposed or Cydia Substrate is available for ART.
-
-Note that XPrivacy with Cydia Substrate has received limited testing
-and that a few restrictions cannot be made to work with Cydia Substrate
-(because Cydia Substrate does not support hooking from the boot class loader):
-
-* Build.SERIAL
-* Settings.Secure.ANDROID_ID
-
-Note that Cydia Substrate is not open source and seems not to be [supported](http://forum.xda-developers.com/showthread.php?t=2466101) very activily.
+if either Xposed or a similar hooking framework is available for ART.
 
 Note that I have started the preparations for Android 5.0 [quite some time ago](https://github.com/M66B/XPrivacy/issues/1757).
 
@@ -1276,6 +1273,16 @@ Therefore it is better to get Xposed working for ART.
 **(76) What happened with the import/export enabler?**
 
 Please read [here](http://forum.xda-developers.com/xposed/modules/xprivacy-ultimate-android-privacy-app-t2320783/page1281#post57091458).
+
+<a name="FAQ77"></a>
+**(77) My pro license does not work!**
+
+* Make sure that the license file name and contents were not altered while downloading the file, for example by a virus scanner or simply by your e-mail client (the most common problem is that some e-mail clients rename the file)
+* Make sure that you have put the license file into the root folder of the SD-card (this is the folder you will see when you connect your device to a PC)
+* After starting XPrivacy, the license file will be imported, which means the license file will be removed from the root folder of the SD-card and that the about dialog will show *Licensed*
+
+If your device doesn't have an SD-card, you will need to put the license file into the root folder of the external storage folder.
+This is the folder you will see if you connect your device to a PC. When in doubt, you can use the menu *Help*, *About* to see the correct folder name.
 
 Support
 -------
@@ -1337,6 +1344,9 @@ You can promote your feature request on XDA, but for a maximum of two times only
 See [here](http://forum.xda-developers.com/showpost.php?p=51574315&postcount=8776) for some more information.
 
 Please [read this](http://forum.xda-developers.com/showpost.php?p=52644313&postcount=9241) before voting.
+
+Implementation of new features is depending on contributions to the XPrivacy project.
+Please read [here](http://forum.xda-developers.com/xposed/modules/xprivacy-ultimate-android-privacy-app-t2320783/post57469136#post57469136) for more information.
 
 **One feature request per issue please!**
 
@@ -1426,8 +1436,9 @@ Contributing
 
 Translations:
 
-* Translate the strings in [this file](https://github.com/M66B/XPrivacy/blob/master/res/values/strings.xml)
-* Omit lines with **translatable="false"**
+* Check if the language [is supported by Android](http://stackoverflow.com/questions/7973023/what-is-the-list-of-supported-languages-locales-on-android) and find its locale
+* Copy [this file](https://github.com/M66B/XPrivacy/blob/master/res/values/strings.xml) to the correct locale folder
+* Translate the texts in the copied file and omit all lines with **translatable="false"**
 * Create a [pull request](https://help.github.com/articles/using-pull-requests) for the new/updated translation
 * If you really don't know how to create a pull request, you can send the translated file [via XDA PM](http://forum.xda-developers.com/member.php?u=2799345)
 
@@ -1498,7 +1509,7 @@ Testing:
 * [Elixir 2](https://play.google.com/store/apps/details?id=com.bartat.android.elixir)
 * [Network Info II](https://play.google.com/store/apps/details?id=aws.apps.networkInfoIi)
 
-Serious contributors do not have to donate for the [pro version](http://www.xprivacy.eu/).
+Serious contributors do not have to donate for a [pro license](http://www.xprivacy.eu/).
 New translations are considered as a serious contribution, but translating a few lines of text is not.
 
 The goal of the project is to provide a decent, free and open source privacy solution for Android to as many as possible people.

@@ -1,8 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="biz.bokhorst.xprivacy"
     android:installLocation="internalOnly"
-    android:versionCode="455"
-    android:versionName="3.5.5" >
+    android:versionCode="462"
+    android:versionName="3.6" >
 
     <uses-sdk
         android:minSdkVersion="15"
@@ -33,7 +33,6 @@
     <uses-permission android:name="biz.bokhorst.xprivacy.MANAGE_PACKAGES" />
     <uses-permission android:name="biz.bokhorst.xprivacy.MANAGE_XPRIVACY" />
     <uses-permission android:name="biz.bokhorst.xprivacy.pro.CHECK" />
-    <uses-permission android:name="cydia.permission.SUBSTRATE" />
 
     <supports-screens
         android:anyDensity="true"

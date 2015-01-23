@@ -10,20 +10,78 @@ Changelog
 
 **Downloads**
 
-* [Xposed module repository](http://repo.xposed.info/module/biz.bokhorst.xprivacy)
-* [GitHub releases](https://github.com/M66B/XPrivacy/releases)
+* [Xposed module repository](http://repo.xposed.info/module/biz.bokhorst.xprivacy) (stable versions)
+* [GitHub releases](https://github.com/M66B/XPrivacy/releases) (test and beta versions)
 
 **Important**
 
 * See [here](https://github.com/M66B/XPrivacy#compatibility) about Android 5.0 (Lollipop) compatibility
 * **Please send the support info when XPrivacy asks for it**
-* See for more information about XPrivacy 3 [this FAQ](https://github.com/M66B/XPrivacy#FAQ68)
 
 **Next release**
 
 * Broadcast *biz.bokhorst.xprivacy.action.EXCEPTION* if the database could not be read ([issue](/../../issues/2081))
 
 [Open issues](https://github.com/M66B/XPrivacy/issues?state=open)
+
+**Version 3.6 STABLE**
+
+* Stable re-release of version 3.5.11
+
+**Version 3.5.11 BETA**
+
+* Prevent opening wrong application details ([issue](/../../issues/2109))
+* Fixed restriction *USB.getSerialNumber*
+* Added restriction *Cast.getDeviceId* and *Cast.getIpAddress* ([issue](/../../issues/2108))
+
+**Version 3.5.10 BETA**
+
+* Fixed disabling location updates in compatibility mode ([issue](/../../issues/2105))
+* Removed Cydia Substrate library
+* Updated Hindi translation
+* Updated Slovak translation
+
+**Version 3.5.9 BETA**
+
+* Prevent accidental application icon/name clicks ([issue](/../../issues/2095))
+* Scale application icons ([issue](/../../issues/2095))
+
+**Version 3.5.8 BETA**
+
+* Disabled application icon caching ([issue](/../../issues/2094))
+* Removed Cydia Substrate support ([issue](/../../issues/2087))
+
+**Version 3.5.7 BETA**
+
+* Fixed allowing applications
+* Updated Catalan translation
+
+**Version 3.5.6 TEST**
+
+KitKat or before:
+
+* Added restriction *Srv_getAccountsForPackage*
+* Added account type parameter for *Srv_getAccounts* and *Srv_getAccountsAsUser*
+* Added restrictions for [LinkProperties](http://developer.android.com/reference/android/net/LinkProperties.html)
+* Added quirk *nousage* to disable usage data for specific applications ([issue](/../../issues/2085))
+* Updated support library
+* Updated Catalan translation
+* Updated Slovak translation
+
+Lollipop:
+
+* Added restriction *Srv_startActivityAsCaller* ([issue](/../../issues/1757))
+* Check external storage directory for *open* restriction ([issue](/../../issues/1757))
+* Added restriction *getInstalledProvidersForProfile* ([issue](/../../issues/1757))
+* Allow white listing / show parameter of *getExternalStorageState* ([issue](/../../issues/1757))
+* Added restrictions for [UsageStatsManager](https://developer.android.com/reference/android/app/usage/UsageStatsManager.html) ([issue](/../../issues/1757))
+* Added restrictions *IpPrefix.getAddress* and *IpPrefix.getRawAddress* ([issue](/../../issues/1757))
+* Added restrictions *InetAddress.getAllByNameOnNet* and *InetAddress.getByNameOnNet* ([issue](/../../issues/1757))
+* Added restriction *Srv_getCurrentSyncsAsUser* ([issue](/../../issues/1757))
+* Added restrictions *Srv_addGpsMeasurementsListener* and *Srv_addGpsNavigationMessageListener* ([issue](/../../issues/1757))
+* Added restrictions *getCarrierConfigValues* and *sendMultimediaMessage* ([issue](/../../issues/1757))
+* Added restrictions *Srv_getImei*, *Srv_getIsimIst* and *Srv_getIsimPcscf* ([issue](/../../issues/1757))
+* Added restrictions *Srv_enableLocationUpdatesForSubscriber*, *Srv_getCdmaMdn*, *Srv_getCdmaMin*, *getLine1AlphaTagForDisplay* and *Srv_getLine1NumberForDisplay* ([issue](/../../issues/1757))
 
 **Version 3.5.5 BETA**
 

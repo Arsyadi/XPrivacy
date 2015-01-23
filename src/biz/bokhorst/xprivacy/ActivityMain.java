@@ -30,6 +30,7 @@ import android.graphics.Paint;
 import android.graphics.Paint.Style;
 import android.graphics.Typeface;
 import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
@@ -1904,6 +1905,8 @@ public class ActivityMain extends ActivityBase implements OnItemSelectedListener
 			private ViewHolder holder;
 			private ApplicationInfoEx xAppInfo = null;
 			private int state;
+			private Bitmap bicon;
+			private Drawable dicon;
 			private boolean used;
 			private boolean enabled;
 			private boolean granted;
@@ -1927,6 +1930,11 @@ public class ActivityMain extends ActivityBase implements OnItemSelectedListener
 
 					// Get state
 					state = xAppInfo.getState(ActivityMain.this);
+
+					// Get icon
+					bicon = xAppInfo.getIconBitmap(ActivityMain.this);
+					if (bicon == null)
+						dicon = xAppInfo.getIcon(ActivityMain.this);
 
 					// Get if used
 					used = (PrivacyManager.getUsage(xAppInfo.getUid(), mRestrictionName, null) != 0);
@@ -1988,7 +1996,10 @@ public class ActivityMain extends ActivityBase implements OnItemSelectedListener
 								getThemed(R.attr.color_state_restricted)));
 
 					// Display icon
-					holder.imgIcon.setImageDrawable(xAppInfo.getIcon(ActivityMain.this));
+					if (bicon == null)
+						holder.imgIcon.setImageDrawable(dicon);
+					else
+						holder.imgIcon.setImageBitmap(bicon);
 					holder.imgIcon.setVisibility(View.VISIBLE);
 
 					// Display on demand
@@ -2034,45 +2045,14 @@ public class ActivityMain extends ActivityBase implements OnItemSelectedListener
 					else
 						holder.row.setBackgroundColor(Color.TRANSPARENT);
 
-					// Listen for multiple select
-					holder.llName.setOnLongClickListener(new View.OnLongClickListener() {
+					// Handle details click
+					holder.imgIcon.setOnClickListener(new View.OnClickListener() {
 						@Override
-						public boolean onLongClick(View view) {
-							if (mListAppSelected.contains(xAppInfo)) {
-								mSelecting = false;
-								mListAppSelected.clear();
-								mAppAdapter.notifyDataSetChanged();
-							} else {
-								mSelecting = true;
-								mListAppSelected.add(xAppInfo);
-								holder.row.setBackgroundColor(mHighlightColor);
-							}
-							showStats();
-							return true;
-						}
-					});
-
-					// Listen for application selection
-					holder.llName.setOnClickListener(new View.OnClickListener() {
-						@Override
-						public void onClick(final View view) {
-							if (mSelecting) {
-								if (mListAppSelected.contains(xAppInfo)) {
-									mListAppSelected.remove(xAppInfo);
-									holder.row.setBackgroundColor(Color.TRANSPARENT);
-									if (mListAppSelected.size() == 0)
-										mSelecting = false;
-								} else {
-									mListAppSelected.add(xAppInfo);
-									holder.row.setBackgroundColor(mHighlightColor);
-								}
-								showStats();
-							} else {
-								Intent intentSettings = new Intent(ActivityMain.this, ActivityApp.class);
-								intentSettings.putExtra(ActivityApp.cUid, xAppInfo.getUid());
-								intentSettings.putExtra(ActivityApp.cRestrictionName, mRestrictionName);
-								ActivityMain.this.startActivity(intentSettings);
-							}
+						public void onClick(View view) {
+							Intent intentSettings = new Intent(ActivityMain.this, ActivityApp.class);
+							intentSettings.putExtra(ActivityApp.cUid, xAppInfo.getUid());
+							intentSettings.putExtra(ActivityApp.cRestrictionName, mRestrictionName);
+							ActivityMain.this.startActivity(intentSettings);
 						}
 					});
 
@@ -2230,7 +2210,7 @@ public class ActivityMain extends ActivityBase implements OnItemSelectedListener
 		@Override
 		@SuppressLint("InflateParams")
 		public View getView(int position, View convertView, ViewGroup parent) {
-			ViewHolder holder;
+			final ViewHolder holder;
 			if (convertView == null) {
 				convertView = mInflater.inflate(R.layout.mainentry, null);
 				holder = new ViewHolder(convertView, position);
@@ -2242,17 +2222,6 @@ public class ActivityMain extends ActivityBase implements OnItemSelectedListener
 
 			// Get info
 			final ApplicationInfoEx xAppInfo = getItem(holder.position);
-
-			// Handle details click
-			holder.imgIcon.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View view) {
-					Intent intentSettings = new Intent(ActivityMain.this, ActivityApp.class);
-					intentSettings.putExtra(ActivityApp.cUid, xAppInfo.getUid());
-					intentSettings.putExtra(ActivityApp.cRestrictionName, mRestrictionName);
-					ActivityMain.this.startActivity(intentSettings);
-				}
-			});
 
 			// Set data
 			holder.row.setBackgroundColor(Color.TRANSPARENT);
@@ -2270,6 +2239,52 @@ public class ActivityMain extends ActivityBase implements OnItemSelectedListener
 			holder.imgCbAsk.setVisibility(View.INVISIBLE);
 			holder.tvName.setEnabled(false);
 			holder.imgCbRestricted.setEnabled(false);
+
+			holder.imgIcon.setClickable(false);
+			holder.imgCbRestricted.setClickable(false);
+			holder.imgCbAsk.setClickable(false);
+
+			// Listen for multiple select
+			holder.llName.setOnLongClickListener(new View.OnLongClickListener() {
+				@Override
+				public boolean onLongClick(View view) {
+					if (mListAppSelected.contains(xAppInfo)) {
+						mSelecting = false;
+						mListAppSelected.clear();
+						mAppAdapter.notifyDataSetChanged();
+					} else {
+						mSelecting = true;
+						mListAppSelected.add(xAppInfo);
+						holder.row.setBackgroundColor(mHighlightColor);
+					}
+					showStats();
+					return true;
+				}
+			});
+
+			// Listen for application selection
+			holder.llName.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(final View view) {
+					if (mSelecting) {
+						if (mListAppSelected.contains(xAppInfo)) {
+							mListAppSelected.remove(xAppInfo);
+							holder.row.setBackgroundColor(Color.TRANSPARENT);
+							if (mListAppSelected.size() == 0)
+								mSelecting = false;
+						} else {
+							mListAppSelected.add(xAppInfo);
+							holder.row.setBackgroundColor(mHighlightColor);
+						}
+						showStats();
+					} else {
+						Intent intentSettings = new Intent(ActivityMain.this, ActivityApp.class);
+						intentSettings.putExtra(ActivityApp.cUid, xAppInfo.getUid());
+						intentSettings.putExtra(ActivityApp.cRestrictionName, mRestrictionName);
+						ActivityMain.this.startActivity(intentSettings);
+					}
+				}
+			});
 
 			// Async update
 			new HolderTask(position, holder, xAppInfo).executeOnExecutor(mExecutor, (Object) null);

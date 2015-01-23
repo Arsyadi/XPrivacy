@@ -19,8 +19,10 @@
     <string name="accounts_Srv_getAccounts" translatable="false"><![CDATA[<a href="https://developer.android.com/reference/android/accounts/AccountManager.html#getAccounts()">Google documentation</a>]]></string>
     <string name="accounts_Srv_getAccountsAsUser" translatable="false"><![CDATA[<a href="https://developer.android.com/reference/android/accounts/AccountManager.html#getAccounts()">Google documentation</a>]]></string>
     <string name="accounts_Srv_getAccountsByFeatures" translatable="false"><![CDATA[<a href="https://developer.android.com/reference/android/accounts/AccountManager.html#getAccountsByTypeAndFeatures(java.lang.String,%20java.lang.String[],%20android.accounts.AccountManagerCallback&lt;android.accounts.Account[]&gt;,%20android.os.Handler)">Google documentation</a>]]></string>
+    <string name="accounts_Srv_getAccountsForPackage" translatable="false"><![CDATA[<a href="https://developer.android.com/reference/android/accounts/AccountManager.html#getAccountsByTypeForPackage(java.lang.String,%20java.lang.String)">Google documentation</a>]]></string>
     <string name="accounts_Srv_getSharedAccountsAsUser" translatable="false"><![CDATA[<a href="https://developer.android.com/reference/android/accounts/AccountManager.html#getAccounts()">Google documentation</a>]]></string>
     <string name="accounts_Srv_getCurrentSyncs" translatable="false"><![CDATA[<a href="https://developer.android.com/reference/android/content/ContentResolver.html#getCurrentSyncs()">Google documentation</a>]]></string>
+    <string name="accounts_Srv_getCurrentSyncsAsUser" translatable="false"><![CDATA[<a href="https://developer.android.com/reference/android/content/ContentResolver.html#getCurrentSyncs()">Google documentation</a>]]></string>
 
     <!-- browser -->
     <string name="browser_BrowserProvider2" translatable="false"><![CDATA[Will restrict access to the browser bookmarks and browser history]]></string>
@@ -31,6 +33,7 @@
 
     <!-- calling -->
     <string name="calling_sendDataMessage" translatable="false"><![CDATA[<a href="https://developer.android.com/reference/android/telephony/gsm/SmsManager.html#sendDataMessage(java.lang.String,%20java.lang.String,%20short,%20byte[],%20android.app.PendingIntent,%20android.app.PendingIntent)">Google documentation</a>]]></string>
+    <string name="calling_sendMultimediaMessage" translatable="false"><![CDATA[<a href="https://developer.android.com/reference/android/telephony/SmsManager.html#sendMultimediaMessage(android.content.Context,%20android.net.Uri, java.lang.String,%20android.os.Bundle,%20android.app.PendingIntent)">Google documentation</a>]]></string>
     <string name="calling_sendMultipartTextMessage" translatable="false"><![CDATA[<a href="https://developer.android.com/reference/android/telephony/gsm/SmsManager.html#sendMultipartTextMessage(java.lang.String,%20java.lang.String,%20java.util.ArrayList&lt;java.lang.String&gt;,%20java.util.ArrayList&lt;android.app.PendingIntent&gt;,%20java.util.ArrayList&lt;android.app.PendingIntent&gt;)">Google documentation</a>]]></string>
     <string name="calling_sendTextMessage" translatable="false"><![CDATA[<a href="https://developer.android.com/reference/android/telephony/gsm/SmsManager.html#sendTextMessage(java.lang.String,%20java.lang.String,%20java.lang.String,%20android.app.PendingIntent,%20android.app.PendingIntent)">Google documentation</a>]]></string>
     <string name="calling_Srv_sendData" translatable="false"><![CDATA[<a href="https://developer.android.com/reference/android/telephony/gsm/SmsManager.html#sendDataMessage(java.lang.String,%20java.lang.String,%20short,%20byte[],%20android.app.PendingIntent,%20android.app.PendingIntent)">Google documentation</a>]]></string>
@@ -94,8 +97,10 @@
     <string name="identification_InputDevice_getName" translatable="false"><![CDATA[<a href="https://developer.android.com/reference/android/view/InputDevice.html#getName()">Google documentation</a>]]></string>
     <string name="identification_USB_getDeviceId" translatable="false"><![CDATA[<a href="https://developer.android.com/reference/android/hardware/usb/UsbDevice.html#getDeviceId(java.lang.String)">Google documentation</a>]]></string>
     <string name="identification_USB_getDeviceName" translatable="false"><![CDATA[<a href="https://developer.android.com/reference/android/hardware/usb/UsbDevice.html#getDeviceName()">Google documentation</a>]]></string>
-    <string name="identification_USB_getSerialNumber" translatable="false"><![CDATA[<a href="http://developer.android.com/reference/android/hardware/usb/UsbDevice.html#getSerialNumber()">Google documentation</a>]]></string>
+    <string name="identification_USB_getSerialNumber" translatable="false"><![CDATA[<a href="https://developer.android.com/reference/android/hardware/usb/UsbDevice.html#getSerialNumber()">Google documentation</a>]]></string>
     <string name="identification_Srv_Android_ID" translatable="false"><![CDATA[<a href="https://developer.android.com/reference/android/provider/Settings.Secure.html#ANDROID_ID">Google documentation</a>]]></string>
+    <string name="identification_Cast_getDeviceId" translatable="false"><![CDATA[<a href="http://developer.android.com/reference/com/google/android/gms/cast/CastDevice.html#getDeviceId()">Google documentation</a>]]></string>
+    <string name="identification_Cast_getIpAddress" translatable="false"><![CDATA[<a href="http://developer.android.com/reference/com/google/android/gms/cast/CastDevice.html#getIpAddress()">Google documentation</a>]]></string>
 
     <!-- internet -->
     <string name="internet_NetworkInterface_getByIndex" translatable="false"><![CDATA[<a href="https://developer.android.com/reference/java/net/NetworkInterface.html#getByIndex(int)">Google documentation</a>]]></string>
@@ -114,11 +119,20 @@
     <string name="internet_NetworkInfo_getState" translatable="false"><![CDATA[<a href="https://developer.android.com/reference/android/net/NetworkInfo.html#getState()">Google documentation</a>]]></string>
     <string name="internet_NetworkInfo_isConnected" translatable="false"><![CDATA[<a href="https://developer.android.com/reference/android/net/NetworkInfo.html#isConnected()">Google documentation</a>]]></string>
     <string name="internet_NetworkInfo_isConnectedOrConnecting" translatable="false"><![CDATA[<a href="https://developer.android.com/reference/android/net/NetworkInfo.html#isConnectedOrConnecting()">Google documentation</a>]]></string>
-    <string name="internet_WiFi_getConnectionInfo" translatable="false"><![CDATA[<a href="http://developer.android.com/reference/android/net/wifi/SupplicantState.html">Google documentation</a>]]></string>
-    <string name="internet_WiFi_Srv_getConnectionInfo" translatable="false"><![CDATA[<a href="http://developer.android.com/reference/android/net/wifi/SupplicantState.html">Google documentation</a>]]></string>
+    <string name="internet_WiFi_getConnectionInfo" translatable="false"><![CDATA[<a href="https://developer.android.com/reference/android/net/wifi/SupplicantState.html">Google documentation</a>]]></string>
+    <string name="internet_WiFi_Srv_getConnectionInfo" translatable="false"><![CDATA[<a href="https://developer.android.com/reference/android/net/wifi/SupplicantState.html">Google documentation</a>]]></string>
     <string name="internet_InetAddress_getAllByName" translatable="false"><![CDATA[<a href="https://developer.android.com/reference/java/net/InetAddress.html#getAllByName(java.lang.String)">Google documentation</a>]]></string>
+    <string name="internet_InetAddress_getAllByNameOnNet" translatable="false"><![CDATA[<a href="https://developer.android.com/reference/android/net/Network.html#getAllByName(java.lang.String)">Google documentation</a>]]></string>
     <string name="internet_InetAddress_getByAddress" translatable="false"><![CDATA[<a href="https://developer.android.com/reference/java/net/InetAddress.html#getByAddress(java.lang.String,%20byte[])">Google documentation</a>]]></string>
     <string name="internet_InetAddress_getByName" translatable="false"><![CDATA[<a href="https://developer.android.com/reference/java/net/InetAddress.html#getByName(java.lang.String)">Google documentation</a>]]></string>
+    <string name="internet_InetAddress_getByNameOnNet" translatable="false"><![CDATA[<a href="https://developer.android.com/reference/android/net/Network.html#getByName(java.lang.String)">Google documentation</a>]]></string>
+    <string name="internet_IpPrefix_getAddress" translatable="false"><![CDATA[<a href="https://developer.android.com/reference/android/net/IpPrefix.html#getAddress()">Google documentation</a>]]></string>
+    <string name="internet_IpPrefix_getRawAddress" translatable="false"><![CDATA[<a href="https://developer.android.com/reference/android/net/IpPrefix.html#getRawAddress()">Google documentation</a>]]></string>
+    <string name="internet_LinkProperties_getAddresses" translatable="false"><![CDATA[<a href="https://developer.android.com/reference/android/net/LinkProperties.html#getLinkAddresses()">Google documentation</a>]]></string>
+    <string name="internet_LinkProperties_getAllAddresses" translatable="false"><![CDATA[<a href="https://developer.android.com/reference/android/net/LinkProperties.html#getLinkAddresses()">Google documentation</a>]]></string>
+    <string name="internet_LinkProperties_getAllLinkAddresses" translatable="false"><![CDATA[<a href=https://developer.android.com/reference/android/net/LinkProperties.html#getLinkAddresses()">Google documentation</a>]]></string>
+    <string name="internet_LinkProperties_getLinkAddresses" translatable="false"><![CDATA[<a href="https://developer.android.com/reference/android/net/LinkProperties.html#getLinkAddresses()">Google documentation</a>]]></string>
+    <string name="internet_LinkProperties_getStackedLinks" translatable="false"><![CDATA[<a href="https://developer.android.com/reference/android/net/LinkProperties.html#getLinkAddresses()">Google documentation</a>]]></string>
     <string name="internet_connect" translatable="false"><![CDATA[Will restrict access to the internet]]></string>
 
     <!-- ipc -->
@@ -148,11 +162,14 @@
     <string name="location_Srv_isProviderEnabled" translatable="false"><![CDATA[<a href="https://developer.android.com/reference/android/location/LocationManager.html#isProviderEnabled(java.lang.String)">Google documentation</a>]]></string>
     <string name="location_Srv_requestLocationUpdates" translatable="false"><![CDATA[<a href="https://developer.android.com/reference/android/location/LocationManager.html#requestLocationUpdates(long,%20float,%20android.location.Criteria,%20android.app.PendingIntent)">Google documentation</a>]]></string>
     <string name="location_Srv_sendExtraCommand" translatable="false"><![CDATA[<a href="https://developer.android.com/reference/android/location/LocationManager.html#sendExtraCommand(java.lang.String,%20java.lang.String,%20android.os.Bundle)">Google documentation</a>]]></string>
+    <string name="location_Srv_addGpsMeasurementsListener" translatable="false"><![CDATA[<a href="https://developer.android.com/reference/android/location/LocationManager.html">Google documentation</a>]]></string>
+    <string name="location_Srv_addGpsNavigationMessageListener" translatable="false"><![CDATA[<a href="https://developer.android.com/reference/android/location/LocationManager.html">Google documentation</a>]]></string>
     <string name="location_enableLocationUpdates" translatable="false"><![CDATA[Will restrict location updates through the <a href="https://developer.android.com/reference/android/telephony/PhoneStateListener.html">phone state listener</a>]]></string>
     <string name="location_getAllCellInfo" translatable="false"><![CDATA[<a href="https://developer.android.com/reference/android/telephony/TelephonyManager.html#getAllCellInfo()">Google documentation</a>]]></string>
     <string name="location_getCellLocation" translatable="false"><![CDATA[<a href="https://developer.android.com/reference/android/telephony/TelephonyManager.html#getCellLocation()">Google documentation</a>]]></string>
     <string name="location_getNeighboringCellInfo" translatable="false"><![CDATA[<a href="https://developer.android.com/reference/android/telephony/TelephonyManager.html#getNeighboringCellInfo()">Google documentation</a>]]></string>
     <string name="location_Srv_enableLocationUpdates" translatable="false"><![CDATA[Will restrict location updates through the <a href="https://developer.android.com/reference/android/telephony/PhoneStateListener.html">phone state listener</a>]]></string>
+    <string name="location_Srv_enableLocationUpdatesForSubscriber" translatable="false"><![CDATA[Will restrict location updates through the <a href="https://developer.android.com/reference/android/telephony/PhoneStateListener.html">phone state listener</a>]]></string>
     <string name="location_Srv_getAllCellInfo" translatable="false"><![CDATA[<a href="https://developer.android.com/reference/android/telephony/TelephonyManager.html#getAllCellInfo()">Google documentation</a>]]></string>
     <string name="location_Srv_getCellLocation" translatable="false"><![CDATA[<a href="https://developer.android.com/reference/android/telephony/TelephonyManager.html#getCellLocation()">Google documentation</a>]]></string>
     <string name="location_Srv_getNeighboringCellInfo" translatable="false"><![CDATA[<a href="https://developer.android.com/reference/android/telephony/TelephonyManager.html#getNeighboringCellInfo()">Google documentation</a>]]></string>
@@ -185,10 +202,10 @@
     <string name="media_Camera_setOneShotPreviewCallback" translatable="false"><![CDATA[<a href="https://developer.android.com/reference/android/hardware/Camera.html#setOneShotPreviewCallback(android.hardware.Camera.PreviewCallback)">Google documentation</a>]]></string>
     <string name="media_Camera_startPreview" translatable="false"><![CDATA[<a href="https://developer.android.com/reference/android/hardware/Camera.html#startPreview()">Google documentation</a>]]></string>
     <string name="media_Camera_takePicture" translatable="false"><![CDATA[<a href="https://developer.android.com/reference/android/hardware/Camera.html#takePicture(android.hardware.Camera.ShutterCallback,%20android.hardware.Camera.PictureCallback,%20android.hardware.Camera.PictureCallback)">Google documentation</a>]]></string>
-    <string name="media_Camera2_capture" translatable="false"><![CDATA[<a href="http://developer.android.com/reference/android/hardware/camera2/CameraCaptureSession.html#capture(android.hardware.camera2.CaptureRequest,%20android.hardware.camera2.CameraCaptureSession.CaptureCallback,%20android.os.Handler)">Google documentation</a>]]></string>
-    <string name="media_Camera2_captureBurst" translatable="false"><![CDATA[<a href="http://developer.android.com/reference/android/hardware/camera2/CameraCaptureSession.html#captureBurst(java.util.List<android.hardware.camera2.CaptureRequest>,%20android.hardware.camera2.CameraCaptureSession.CaptureCallback,%20android.os.Handler)">Google documentation</a>]]></string>
-    <string name="media_Camera2_setRepeatingBurst" translatable="false"><![CDATA[<a href="http://developer.android.com/reference/android/hardware/camera2/CameraCaptureSession.html#setRepeatingBurst(java.util.List<android.hardware.camera2.CaptureRequest>,%20android.hardware.camera2.CameraCaptureSession.CaptureCallback,%20android.os.Handler)">Google documentation</a>]]></string>
-    <string name="media_Camera2_setRepeatingRequest" translatable="false"><![CDATA[<a href="http://developer.android.com/reference/android/hardware/camera2/CameraCaptureSession.html#setRepeatingRequest(android.hardware.camera2.CaptureRequest,%20android.hardware.camera2.CameraCaptureSession.CaptureCallback,%20android.os.Handler)">Google documentation</a>]]></string>
+    <string name="media_Camera2_capture" translatable="false"><![CDATA[<a href="https://developer.android.com/reference/android/hardware/camera2/CameraCaptureSession.html#capture(android.hardware.camera2.CaptureRequest,%20android.hardware.camera2.CameraCaptureSession.CaptureCallback,%20android.os.Handler)">Google documentation</a>]]></string>
+    <string name="media_Camera2_captureBurst" translatable="false"><![CDATA[<a href="https://developer.android.com/reference/android/hardware/camera2/CameraCaptureSession.html#captureBurst(java.util.List<android.hardware.camera2.CaptureRequest>,%20android.hardware.camera2.CameraCaptureSession.CaptureCallback,%20android.os.Handler)">Google documentation</a>]]></string>
+    <string name="media_Camera2_setRepeatingBurst" translatable="false"><![CDATA[<a href="https://developer.android.com/reference/android/hardware/camera2/CameraCaptureSession.html#setRepeatingBurst(java.util.List<android.hardware.camera2.CaptureRequest>,%20android.hardware.camera2.CameraCaptureSession.CaptureCallback,%20android.os.Handler)">Google documentation</a>]]></string>
+    <string name="media_Camera2_setRepeatingRequest" translatable="false"><![CDATA[<a href="https://developer.android.com/reference/android/hardware/camera2/CameraCaptureSession.html#setRepeatingRequest(android.hardware.camera2.CaptureRequest,%20android.hardware.camera2.CameraCaptureSession.CaptureCallback,%20android.os.Handler)">Google documentation</a>]]></string>
     <string name="media_MediaRecorder_setOutputFile" translatable="false"><![CDATA[<a href="https://developer.android.com/reference/android/media/MediaRecorder.html#setOutputFile(java.io.FileDescriptor)">Google documentation</a>]]></string>
     <string name="media_MediaRecorder_start" translatable="false"><![CDATA[<a href="https://developer.android.com/reference/android/media/MediaRecorder.html#start()">Google documentation</a>]]></string>
     <string name="media_android_media_action_IMAGE_CAPTURE" translatable="false"><![CDATA[<a href="https://developer.android.com/reference/android/provider/MediaStore.html#ACTION_IMAGE_CAPTURE">Google documentation</a>]]></string>
@@ -200,6 +217,7 @@
 
     <!-- messages -->
     <string name="messages_getAllMessagesFromIcc" translatable="false"><![CDATA[Will restrict access to messages stored on the SIM card]]></string>
+    <string name="messages_getCarrierConfigValues" translatable="false"><![CDATA[<a href="https://developer.android.com/reference/android/telephony/SmsManager.html#getCarrierConfigValues()">Google documentation</a>]]></string>
     <string name="messages_Srv_getAllMessagesFromIccEf" translatable="false"><![CDATA[Will restrict access to messages stored on the SIM card]]></string>
     <string name="messages_SmsProvider" translatable="false"><![CDATA[Will restrict access to SMS messages]]></string>
     <string name="messages_MmsProvider" translatable="false"><![CDATA[Will restrict access to MMS messages]]></string>
@@ -299,11 +317,18 @@
     <string name="phone_Srv_getVoiceMailNumber" translatable="false"><![CDATA[<a href="https://developer.android.com/reference/android/telephony/TelephonyManager.html#getVoiceMailNumber()">Google documentation</a>]]></string>
     <string name="phone_Srv_getCompleteVoiceMailNumber" translatable="false"><![CDATA[<a href="https://developer.android.com/reference/android/telephony/TelephonyManager.html#getVoiceMailNumber()">Google documentation</a>]]></string>
     <string name="phone_Srv_listen" translatable="false"><![CDATA[<a href="https://developer.android.com/reference/android/telephony/TelephonyManager.html#listen(android.telephony.PhoneStateListener,%20int)">Google documentation</a>]]></string>
+    <string name="phone_Srv_getImei" translatable="false"><![CDATA[<a href="https://developer.android.com/reference/android/telephony/TelephonyManager.html#getDeviceId()">Google documentation</a>]]></string>
+    <string name="phone_Srv_getIsimIst" translatable="false"><![CDATA[Will restrict access to the IMS Service Table (IST) that was loaded from the ISIM]]></string>
+    <string name="phone_Srv_getIsimPcscf" translatable="false"><![CDATA[Will restrict access to the IMS Proxy Call Session Control Function(PCSCF) that were loaded from the ISIM]]></string>
+    <string name="phone_Srv_getCdmaMdn" translatable="false"><![CDATA[Will restrict access to the CDMA MDN]]></string>
+    <string name="phone_Srv_getCdmaMin" translatable="false"><![CDATA[Will restrict access to the CDMA MIN]]></string>
+    <string name="phone_Srv_getLine1AlphaTagForDisplay" translatable="false"><![CDATA[Will restrict access to hidden function to get the alpha identifier for line 1]]></string>
+    <string name="phone_Srv_getLine1NumberForDisplay" translatable="false"><![CDATA[<a href="https://developer.android.com/reference/android/telephony/TelephonyManager.html#getLine1Number()">Google documentation</a>]]></string>
 
     <!-- sensors -->
     <string name="sensors_getDefaultSensor" translatable="false"><![CDATA[<a href="https://developer.android.com/reference/android/hardware/SensorManager.html#getDefaultSensor(int)">Google documentation</a>]]></string>
     <string name="sensors_getSensorList" translatable="false"><![CDATA[<a href="https://developer.android.com/reference/android/hardware/SensorManager.html#getSensorList(int)">Google documentation</a>]]></string>
-    <string name="sensors_registerListener" translatable="false"><![CDATA[Will limit the rate of the gyroscope to 100 Hz to prevent eavesdropping<br /><br /><a href="http://developer.android.com/reference/android/hardware/SensorManager.html#registerListener(android.hardware.SensorEventListener,%20android.hardware.Sensor, int)">Google documentation</a>]]></string>
+    <string name="sensors_registerListener" translatable="false"><![CDATA[Will limit the rate of the gyroscope to 100 Hz to prevent eavesdropping<br /><br /><a href="https://developer.android.com/reference/android/hardware/SensorManager.html#registerListener(android.hardware.SensorEventListener,%20android.hardware.Sensor, int)">Google documentation</a>]]></string>
     <string name="sensors_acceleration" translatable="false"><![CDATA[<a href="https://developer.android.com/reference/android/hardware/Sensor.html">Google documentation</a>]]></string>
     <string name="sensors_gravity" translatable="false"><![CDATA[<a href="https://developer.android.com/reference/android/hardware/Sensor.html">Google documentation</a>]]></string>
     <string name="sensors_humidity" translatable="false"><![CDATA[<a href="https://developer.android.com/reference/android/hardware/Sensor.html">Google documentation</a>]]></string>
@@ -367,6 +392,7 @@
     <string name="system_Srv_queryIntentServices" translatable="false"><![CDATA[<a href="https://developer.android.com/reference/android/content/pm/PackageManager.html#queryIntentServices(android.content.Intent,%20int)">Google documentation</a>]]></string>
     <string name="system_Srv_getPersistentApplications" translatable="false"><![CDATA[<a href="https://developer.android.com/guide/topics/manifest/application-element.html#persistent">Google documentation</a>]]></string>
     <string name="system_getInstalledProviders" translatable="false"><![CDATA[<a href="https://developer.android.com/reference/android/appwidget/AppWidgetManager.html#getInstalledProviders()">Google documentation</a>]]></string>
+    <string name="system_getInstalledProvidersForProfile" translatable="false"><![CDATA[<a href="https://developer.android.com/reference/android/appwidget/AppWidgetManager.html#getInstalledProvidersForProfile(android.os.UserHandle)">Google documentation</a>]]></string>
     <string name="system_Srv_getInstalledProviders" translatable="false"><![CDATA[<a href="https://developer.android.com/reference/android/appwidget/AppWidgetManager.html#getInstalledProviders()">Google documentation</a>]]></string>
     <string name="system_getRecentTasks" translatable="false"><![CDATA[<a href="https://developer.android.com/reference/android/app/ActivityManager.html#getRecentTasks(int,%20int)">Google documentation</a>]]></string>
     <string name="system_getRunningAppProcesses" translatable="false"><![CDATA[<a href="https://developer.android.com/reference/android/app/ActivityManager.html#getRunningAppProcesses()">Google documentation</a>]]></string>
@@ -393,10 +419,17 @@
     <string name="system_checkPermission" translatable="false"><![CDATA[<a href="https://developer.android.com/reference/android/content/pm/PackageManager.html#checkPermission(java.lang.String,%20java.lang.String)">Google documentation</a>]]></string>
     <string name="system_checkUidPermission" translatable="false"><![CDATA[<a href="https://developer.android.com/reference/android/content/pm/PackageManager.html#checkPermission(java.lang.String,%20java.lang.String)">Google documentation</a>]]></string>
     <string name="system_IntentFirewall" translatable="false"><![CDATA[<a href="http://www.cis.syr.edu/~wedu/android/IntentFirewall/">Documentation</a>]]></string>
+    <string name="system_queryAndAggregateUsageStats" translatable="false"><![CDATA[<a href="https://developer.android.com/reference/android/app/usage/UsageStatsManager.html#queryAndAggregateUsageStats(long, long)">Documentation</a>]]></string>
+    <string name="system_queryConfigurations" translatable="false"><![CDATA[<a href="https://developer.android.com/reference/android/app/usage/UsageStatsManager.html#queryConfigurations(int, long, long)">Documentation</a>]]></string>
+    <string name="system_queryEvents" translatable="false"><![CDATA[<a href="https://developer.android.com/reference/android/app/usage/UsageStatsManager.html#queryEvents(long, long)">Documentation</a>]]></string>
+    <string name="system_queryUsageStats" translatable="false"><![CDATA[<a href="https://developer.android.com/reference/android/app/usage/UsageStatsManager.html#queryUsageStats(int, long, long)">Documentation</a>]]></string>
+    <string name="system_Srv_queryConfigurationStats" translatable="false"><![CDATA[<a href="https://developer.android.com/reference/android/app/usage/UsageStatsManager.html#queryConfigurations(int, long, long)">Documentation</a>]]></string>
+    <string name="system_Srv_queryEvents" translatable="false"><![CDATA[<a href="https://developer.android.com/reference/android/app/usage/UsageStatsManager.html#queryEvents(long, long)">Documentation</a>]]></string>
+    <string name="system_Srv_queryUsageStats" translatable="false"><![CDATA[<a href="https://developer.android.com/reference/android/app/usage/UsageStatsManager.html#queryUsageStats(int, long, long)">Documentation</a>]]></string>
 
     <!-- view -->
-    <string name="view_loadUrl" translatable="false"><![CDATA[<a href="https://developer.android.com/reference/android/webkit/WebView.html#loadUrl(java.lang.String)">Google documentation</a>]]></string>
-    <string name="view_WebView" translatable="false"><![CDATA[<a href="https://developer.android.com/reference/android/webkit/WebView.html">Google documentation</a>]]></string>
+    <string name="view_loadUrl" translatable="false"><![CDATA[Will restrict access to the user agent]]></string>
+    <string name="view_WebView" translatable="false"><![CDATA[Will restrict access to the user agent]]></string>
     <string name="view_getDefaultUserAgent" translatable="false"><![CDATA[<a href="https://developer.android.com/reference/android/webkit/WebSettings.html#getDefaultUserAgent(android.content.Context)">Google documentation</a>]]></string>
     <string name="view_getUserAgent" translatable="false"><![CDATA[<a href="https://developer.android.com/reference/android/webkit/WebSettings.html#getUserAgentString()">Google documentation</a>]]></string>
     <string name="view_getUserAgentString" translatable="false"><![CDATA[<a href="https://developer.android.com/reference/android/webkit/WebSettings.html#getUserAgentString()">Google documentation</a>]]></string>

@@ -1,9 +1,6 @@
 package biz.bokhorst.xprivacy;
 
 import java.lang.reflect.Field;
-import java.lang.reflect.InvocationHandler;
-import java.lang.reflect.Method;
-import java.lang.reflect.Proxy;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -12,7 +9,7 @@ import java.util.WeakHashMap;
 import android.app.PendingIntent;
 import android.location.Location;
 import android.os.Binder;
-import android.os.IInterface;
+import android.os.Bundle;
 import android.location.GpsSatellite;
 import android.location.GpsStatus;
 import android.location.LocationListener;
@@ -74,6 +71,11 @@ public class XLocationManager extends XHook {
 	// public boolean isProviderEnabled(java.lang.String provider)
 	// public boolean sendExtraCommand(java.lang.String provider, java.lang.String command, android.os.Bundle extras)
 	// http://grepcode.com/file/repository.grepcode.com/java/ext/com.google.android/android/4.4.4_r1/com/android/server/LocationManagerService.java
+	// public boolean addGpsMeasurementsListener(IGpsMeasurementsListener listener, String packageName)
+	// public boolean addGpsNavigationMessageListener(IGpsNavigationMessageListener listener, String packageName)
+	// public boolean removeGpsMeasurementsListener(IGpsMeasurementsListener listener)
+	// public boolean removeGpsNavigationMessageListener(IGpsNavigationMessageListener listener)
+	// http://grepcode.com/file/repository.grepcode.com/java/ext/com.google.android/android/5.0.0_r1/com/android/server/LocationManagerService.java
 
 	// @formatter:on
 
@@ -92,7 +94,9 @@ public class XLocationManager extends XHook {
 		Srv_getLastLocation,
 		Srv_addGpsStatusListener, Srv_removeGpsStatusListener,
 		Srv_getAllProviders, Srv_getProviders, Srv_getBestProvider, Srv_isProviderEnabled,
-		Srv_sendExtraCommand
+		Srv_sendExtraCommand,
+
+		Srv_addGpsMeasurementsListener, Srv_addGpsNavigationMessageListener, Srv_removeGpsMeasurementsListener, Srv_removeGpsNavigationMessageListener
 	};
 	// @formatter:on
 
@@ -134,12 +138,24 @@ public class XLocationManager extends XHook {
 		case addGpsStatusListener:
 		case addNmeaListener:
 		case Srv_addGpsStatusListener:
+		case Srv_addGpsMeasurementsListener:
+		case Srv_addGpsNavigationMessageListener:
 			if (isRestricted(param))
 				param.setResult(false);
 			break;
 
 		case Srv_removeGpsStatusListener:
 			if (isRestricted(param, PrivacyManager.cLocation, "Srv_addGpsStatusListener"))
+				param.setResult(null);
+			break;
+
+		case Srv_removeGpsMeasurementsListener:
+			if (isRestricted(param, PrivacyManager.cLocation, "Srv_addGpsMeasurementsListener"))
+				param.setResult(null);
+			break;
+
+		case Srv_removeGpsNavigationMessageListener:
+			if (isRestricted(param, PrivacyManager.cLocation, "Srv_addGpsNavigationMessageListener"))
 				param.setResult(null);
 			break;
 
@@ -216,8 +232,12 @@ public class XLocationManager extends XHook {
 		case addProximityAlert:
 		case Srv_requestGeofence:
 		case Srv_addGpsStatusListener:
+		case Srv_addGpsMeasurementsListener:
+		case Srv_addGpsNavigationMessageListener:
 		case Srv_removeGeofence:
 		case Srv_removeGpsStatusListener:
+		case Srv_removeGpsMeasurementsListener:
+		case Srv_removeGpsNavigationMessageListener:
 			// Do nothing
 			break;
 
@@ -302,14 +322,21 @@ public class XLocationManager extends XHook {
 				param.setResult(null);
 
 			else if (param.args[arg] != null && param.thisObject != null) {
-				// Create proxy
-				ClassLoader cl = param.thisObject.getClass().getClassLoader();
-				InvocationHandler ih = new OnLocationChangedHandler(Binder.getCallingUid(), param.args[arg]);
-				Object proxy = Proxy.newProxyInstance(cl, new Class<?>[] { interfaze }, ih);
-
 				Object key = param.args[arg];
-				if (key instanceof IInterface)
-					key = ((IInterface) key).asBinder();
+				synchronized (mMapProxy) {
+					// Reuse existing proxy
+					if (mMapProxy.containsKey(key)) {
+						param.args[arg] = mMapProxy.get(key);
+						return;
+					}
+
+					// Already proxied
+					if (mMapProxy.containsValue(key))
+						return;
+				}
+
+				// Create proxy
+				Object proxy = new ProxyLocationListener(Binder.getCallingUid(), (LocationListener) param.args[arg]);
 
 				// Use proxy
 				synchronized (mMapProxy) {
@@ -326,29 +353,42 @@ public class XLocationManager extends XHook {
 
 			else if (param.args[arg] != null) {
 				Object key = param.args[arg];
-				if (key instanceof IInterface)
-					key = ((IInterface) key).asBinder();
-
 				synchronized (mMapProxy) {
-					if (mMapProxy.containsKey(key))
+					if (mMapProxy.containsKey(key)) {
 						param.args[arg] = mMapProxy.get(key);
+					}
 				}
 			}
 	}
 
-	private class OnLocationChangedHandler implements InvocationHandler {
+	private static class ProxyLocationListener implements LocationListener {
 		private int mUid;
-		private Object mTarget;
+		private LocationListener mListener;
 
-		public OnLocationChangedHandler(int uid, Object target) {
+		public ProxyLocationListener(int uid, LocationListener listener) {
 			mUid = uid;
-			mTarget = target;
+			mListener = listener;
 		}
 
-		public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
-			if ("onLocationChanged".equals(method.getName()))
-				args[0] = PrivacyManager.getDefacedLocation(mUid, (Location) args[0]);
-			return method.invoke(mTarget, args);
+		@Override
+		public void onLocationChanged(Location location) {
+			Location fakeLocation = PrivacyManager.getDefacedLocation(mUid, location);
+			mListener.onLocationChanged(fakeLocation);
+		}
+
+		@Override
+		public void onProviderDisabled(String provider) {
+			mListener.onProviderDisabled(provider);
+		}
+
+		@Override
+		public void onProviderEnabled(String provider) {
+			mListener.onProviderEnabled(provider);
+		}
+
+		@Override
+		public void onStatusChanged(String provider, int status, Bundle extras) {
+			mListener.onStatusChanged(provider, status, extras);
 		}
 	}
 }

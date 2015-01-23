@@ -142,6 +142,7 @@ public class PrivacyManager {
 	public final static String cSettingUpdates = "Updates";
 	public final static String cSettingMethodExpert = "MethodExpert";
 	public final static String cSettingWhitelistNoModify = "WhitelistNoModify";
+	public final static String cSettingNoUsageData = "NoUsageData";
 
 	public final static String cSettingODExpert = "ODExpert";
 	public final static String cSettingODCategory = "ODCategory";
@@ -1152,6 +1153,9 @@ public class PrivacyManager {
 			return cDeface;
 
 		if (name.equals("BTName"))
+			return cDeface;
+
+		if (name.equals("CastID"))
 			return cDeface;
 
 		// Fallback

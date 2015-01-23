@@ -82,7 +82,7 @@ public class PrivacyService extends IPrivacyService.Stub {
 	private static final String cTableUsage = "usage";
 	private static final String cTableSetting = "setting";
 
-	private static final int cCurrentVersion = 455;
+	private static final int cCurrentVersion = 462;
 	private static final String cServiceName = "xprivacy453";
 
 	private boolean mCorrupt = false;
@@ -663,7 +663,8 @@ public class PrivacyService extends IPrivacyService.Stub {
 			throws RemoteException {
 		// Check if enabled
 		final int userId = Util.getUserId(restriction.uid);
-		if (getSettingBool(userId, PrivacyManager.cSettingUsage, true)) {
+		if (getSettingBool(userId, PrivacyManager.cSettingUsage, true)
+				&& !getSettingBool(restriction.uid, PrivacyManager.cSettingNoUsageData, false)) {
 			// Check secret
 			boolean allowed = true;
 			if (Util.getAppId(Binder.getCallingUid()) != getXUid()) {

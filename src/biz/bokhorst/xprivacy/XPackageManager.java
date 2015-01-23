@@ -71,7 +71,7 @@ public class XPackageManager extends XHook {
 	// public PackageInfo getPackageInfo(String packageName, int flags, int userId)
 	// public ApplicationInfo getApplicationInfo(String packageName, int flags, int userId)
 
-	// http://grepcode.com/file/repository.grepcode.com/java/ext/com.google.android/android/4.4.2_r1/com/android/server/pm/PackageManagerService.java
+	// http://grepcode.com/file/repository.grepcode.com/java/ext/com.google.android/android/5.0.0_r1/com/android/server/pm/PackageManagerService.java
 
 	// @formatter:on
 
@@ -379,8 +379,9 @@ public class XPackageManager extends XHook {
 		return result;
 	}
 
-	public static boolean isPackageAllowed(int uid, String packageName) {
-		if (uid == Binder.getCallingUid())
+	public static boolean isPackageAllowed(int puid, String packageName) {
+		int uid = Binder.getCallingUid();
+		if (puid == uid)
 			return true;
 
 		if (packageName == null) {
