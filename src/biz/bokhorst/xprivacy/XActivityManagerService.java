@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.concurrent.Semaphore;
 
 import android.annotation.SuppressLint;
+import android.os.Build;
 import android.util.Log;
 
 @SuppressLint("InlinedApi")
@@ -25,6 +26,10 @@ public class XActivityManagerService extends XHook {
 
 	@Override
 	public boolean isVisible() {
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
+			if (mMethod == Methods.goingToSleep || mMethod == Methods.wakingUp)
+				return false;
+
 		return (mMethod != Methods.appNotResponding && mMethod != Methods.finishBooting);
 	}
 
@@ -43,7 +48,10 @@ public class XActivityManagerService extends XHook {
 	// 4.0.3+ public void goingToSleep()
 	// 4.0.3+ public void wakingUp()
 	// 4.0.3+ public boolean shutdown(int timeout)
-	// frameworks/base/services/java/com/android/server/am/ActivityManagerService.java
+	// 4.2+ public final void activityResumed(IBinder token)
+	// public final void activityPaused(IBinder token)
+	// http://grepcode.com/file/repository.grepcode.com/java/ext/com.google.android/android/5.0.2_r1/com/android/server/am/ActivityManagerService.java/
+	// http://grepcode.com/file/repository.grepcode.com/java/ext/com.google.android/android/5.0.2_r1/com/android/server/am/ActivityRecord.java/
 
 	// @formatter:on
 
@@ -60,7 +68,7 @@ public class XActivityManagerService extends XHook {
 		listHook.add(new XActivityManagerService(Methods.appNotResponding));
 		listHook.add(new XActivityManagerService(Methods.systemReady));
 		listHook.add(new XActivityManagerService(Methods.finishBooting));
-		// setLockScreenShown appears not to be present in some 4.2.2 ROMs
+		// setLockScreenShown appears to be not present in some 4.2.2 ROMs
 		listHook.add(new XActivityManagerService(Methods.setLockScreenShown));
 		listHook.add(new XActivityManagerService(Methods.goingToSleep));
 		listHook.add(new XActivityManagerService(Methods.wakingUp));
@@ -143,6 +151,7 @@ public class XActivityManagerService extends XHook {
 			break;
 
 		case systemReady:
+			// Do nothing
 			Util.log(this, Log.WARN, "System ready");
 			break;
 
@@ -160,6 +169,7 @@ public class XActivityManagerService extends XHook {
 			break;
 
 		case goingToSleep:
+			// Do nothing
 			break;
 
 		case wakingUp:
@@ -168,6 +178,7 @@ public class XActivityManagerService extends XHook {
 			break;
 
 		case shutdown:
+			// Do nothing
 			break;
 		}
 	}

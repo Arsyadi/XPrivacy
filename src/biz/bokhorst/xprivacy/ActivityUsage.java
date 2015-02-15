@@ -104,6 +104,12 @@ public class ActivityUsage extends ActivityBase {
 	}
 
 	@Override
+	public boolean onPrepareOptionsMenu(Menu menu) {
+		menu.findItem(R.id.menu_whitelists).setVisible(mUid != 0);
+		return super.onPrepareOptionsMenu(menu);
+	}
+
+	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		UsageTask usageTask;
 		switch (item.getItemId()) {
@@ -132,6 +138,16 @@ public class ActivityUsage extends ActivityBase {
 			PrivacyManager.deleteUsage(mUid);
 			usageTask = new UsageTask();
 			usageTask.executeOnExecutor(mExecutor, (Object) null);
+			return true;
+
+		case R.id.menu_whitelists:
+			if (Util.hasProLicense(this) == null) {
+				// Redirect to pro page
+				Util.viewUri(this, ActivityMain.cProUri);
+			} else {
+				WhitelistTask whitelistsTask = new WhitelistTask(mUid, null, this);
+				whitelistsTask.executeOnExecutor(mExecutor, (Object) null);
+			}
 			return true;
 
 		case R.id.menu_settings:

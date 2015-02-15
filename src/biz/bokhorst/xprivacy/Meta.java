@@ -7,6 +7,7 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.nfc.NfcAdapter;
+import android.os.Build;
 import android.provider.MediaStore;
 import android.provider.Telephony;
 import android.telephony.TelephonyManager;
@@ -344,7 +345,7 @@ public class Meta {
 		mListHook.add(new Hook("notifications", "com.google.android.c2dm.intent.REGISTRATION", "com.google.android.c2dm.permission.RECEIVE", 10, null, null).dangerous());
 		mListHook.add(new Hook("notifications", "com.google.android.c2dm.intent.RECEIVE", "com.google.android.c2dm.permission.RECEIVE", 10, null, null).dangerous());
 
-		mListHook.add(new Hook("overlay", "addView", "SYSTEM_ALERT_WINDOW", 1, null, null).unsafe());
+		mListHook.add(new Hook("overlay", "addView", "SYSTEM_ALERT_WINDOW", 1, null, null).unsafe().optional());
 
 		mListHook.add(new Hook("phone", "getDeviceId", "READ_PHONE_STATE", 10, null, null).notAOSP(19));
 		mListHook.add(new Hook("phone", "getGroupIdLevel1", "READ_PHONE_STATE", 18, null, null).notAOSP(19));
@@ -466,7 +467,8 @@ public class Meta {
 
 		mListHook.add(new Hook("system", "getInstalledProviders", "", 3, null, null).notAOSP(19).dangerous());
 		mListHook.add(new Hook("system", "getInstalledProvidersForProfile", "", 21, "3.5.6", null).notAOSP(21).dangerous());
-		mListHook.add(new Hook("system", "Srv_getInstalledProviders", "", 3, "2.99", "getInstalledProviders").AOSP(19).dangerous());
+		mListHook.add(new Hook("system", "Srv_getInstalledProviders", "", 3, "2.99", "getInstalledProviders").AOSP(19).to(19).dangerous());
+		mListHook.add(new Hook("system", "Srv_getInstalledProvidersForProfile", "", 3, "3.6.6", null).AOSP(21).dangerous());
 
 		mListHook.add(new Hook("system", "getRecentTasks", "GET_TASKS", 1, null, null).notAOSP(19).dangerous());
 		mListHook.add(new Hook("system", "getRunningAppProcesses", "", 3, null, null).notAOSP(19).dangerous());
@@ -506,8 +508,9 @@ public class Meta {
 		mListHook.add(new Hook("system", "Srv_queryEvents", null, 21, "3.5.6", null).AOSP(21));
 		mListHook.add(new Hook("system", "Srv_queryUsageStats", null, 21, "3.5.6", null).AOSP(21));
 
-		mListHook.add(new Hook("view", "loadUrl", "", 1, null, null).unsafe().whitelist(cTypeUrl));
-		mListHook.add(new Hook("view", "WebView", "", 1, null, null).unsafe());
+		mListHook.add(new Hook("view", "loadUrl", "", 1, "3.6.2", "false").unsafe().whitelist(cTypeUrl));
+		mListHook.add(new Hook("view", "postUrl", "", 1, "3.6.2", null).unsafe().whitelist(cTypeUrl));
+		mListHook.add(new Hook("view", "initUserAgentString", "", 3, "3.6.2", null).unsafe());
 		mListHook.add(new Hook("view", "getDefaultUserAgent", "", 17, null, null).unsafe());
 		mListHook.add(new Hook("view", "getUserAgent", "", 3, null, null).unsafe());
 		mListHook.add(new Hook("view", "getUserAgentString", "", 3, null, null).unsafe());
@@ -551,6 +554,8 @@ public class Meta {
 		mListHook.add(new Hook(null, "goingToSleep", "", 16, null, null));
 		mListHook.add(new Hook(null, "wakingUp", "", 16, null, null));
 		mListHook.add(new Hook(null, "shutdown", "", 15, null, null));
+		mListHook.add(new Hook(null, "activityResumed", "", Build.VERSION_CODES.JELLY_BEAN_MR1, null, null));
+		mListHook.add(new Hook(null, "activityPaused", "", Build.VERSION_CODES.JELLY_BEAN_MR1, null, null));
 
 		// AppIndexApi
 		mListHook.add(new Hook(null, "GMS5.viewEnd", "", 1, null, null));
@@ -624,11 +629,12 @@ public class Meta {
 		mListHook.add(new Hook(null, "isXposedEnabled", "", 15, null, null));
 
 		// WebView
+		mListHook.add(new Hook(null, "WebView", "", 1, null, null));
 		mListHook.add(new Hook(null, "getSettings", "", 1, null, null));
 
 		// WindowManagerImpl
-		mListHook.add(new Hook(null, "removeView", "", 1, null, null));
-		mListHook.add(new Hook(null, "updateViewLayout", "", 1, null, null));
+		mListHook.add(new Hook(null, "removeView", "", 1, null, null).optional());
+		mListHook.add(new Hook(null, "updateViewLayout", "", 1, null, null).optional());
 
 		// @formatter:on
 		return mListHook;

@@ -15,7 +15,6 @@ Changelog
 
 **Important**
 
-* See [here](https://github.com/M66B/XPrivacy#compatibility) about Android 5.0 (Lollipop) compatibility
 * **Please send the support info when XPrivacy asks for it**
 
 **Next release**
@@ -23,6 +22,32 @@ Changelog
 * Broadcast *biz.bokhorst.xprivacy.action.EXCEPTION* if the database could not be read ([issue](/../../issues/2081))
 
 [Open issues](https://github.com/M66B/XPrivacy/issues?state=open)
+
+**Version 3.6.6 ALPHA**
+
+* Android 5.x (Lollipop) support
+	* **Please read the [installation instructions](https://github.com/M66B/XPrivacy/#installation)**
+* Reverted "Manage white/black lists from usage data" ([issue](/../../issues/2093))
+* Added menu *Manage whitelists* to usage data view for a single application ([issue](/../../issues/2093))
+* Updated Czech translation
+
+**Version 3.6.5 BETA**
+
+* Use application whitelist for *getPackagesForUid* and *Srv_getPackagesForUid* ([issue](/../../issues/2116))
+* Manage white/black lists from usage data ([issue](/../../issues/2093))
+	* Long pressing the uid will toggle the whitelist entry and show the whitelist manager
+
+**Version 3.6.2 STABLE**
+
+* Block *ACTION_NEW_OUTGOING_CALL* and *ACTION_PHONE_STATE_CHANGED* instead of faking phone number ([issue](/../../issues/2132))
+* Renamed restriction *View.WebView* into *View.initUserAgentString*
+* Added restriction *View.postUrl*
+* Changed restriction *View.loadUrl* to restrict loading URLs instead of restriction the user agent string ([issue](/../../issues/2123))
+	* Existing *loadUrl* restrictions will be reset and set to ask
+
+**Version 3.6.1 STABLE**
+
+* Fixed location restriction in AOSP mode ([issue](/../../issues/2129))
 
 **Version 3.6 STABLE**
 

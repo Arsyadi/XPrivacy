@@ -11,6 +11,7 @@ import android.net.wifi.SupplicantState;
 import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiInfo;
 import android.os.Binder;
+import android.os.Build;
 
 public class XWifiManager extends XHook {
 	private Methods mMethod;
@@ -57,26 +58,33 @@ public class XWifiManager extends XHook {
 	};
 	// @formatter:on
 
-	public static List<XHook> getInstances(String className) {
+	public static List<XHook> getInstances(String className, boolean server) {
 		List<XHook> listHook = new ArrayList<XHook>();
 		if (!cClassName.equals(className)) {
 			if (className == null)
 				className = cClassName;
 
+			String srvClassName;
+			if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
+				srvClassName = "com.android.server.wifi.WifiServiceImpl";
+			else
+				srvClassName = "com.android.server.wifi.WifiService";
+
 			for (Methods wifi : Methods.values())
-				if (wifi.name().startsWith("Srv_"))
-					listHook.add(new XWifiManager(wifi, PrivacyManager.cNetwork, "com.android.server.wifi.WifiService"));
-				else
+				if (wifi.name().startsWith("Srv_")) {
+					if (server)
+						listHook.add(new XWifiManager(wifi, PrivacyManager.cNetwork, srvClassName));
+				} else
 					listHook.add(new XWifiManager(wifi, PrivacyManager.cNetwork, className));
 
 			listHook.add(new XWifiManager(Methods.getScanResults, PrivacyManager.cLocation, className));
-			listHook.add(new XWifiManager(Methods.Srv_getScanResults, PrivacyManager.cLocation,
-					"com.android.server.wifi.WifiService"));
+			if (server)
+				listHook.add(new XWifiManager(Methods.Srv_getScanResults, PrivacyManager.cLocation, srvClassName));
 
 			// This is to fake "offline", no permission required
 			listHook.add(new XWifiManager(Methods.getConnectionInfo, PrivacyManager.cInternet, className));
-			listHook.add(new XWifiManager(Methods.Srv_getConnectionInfo, PrivacyManager.cInternet,
-					"com.android.server.wifi.WifiService"));
+			if (server)
+				listHook.add(new XWifiManager(Methods.Srv_getConnectionInfo, PrivacyManager.cInternet, srvClassName));
 		}
 
 		return listHook;

@@ -31,11 +31,7 @@ public class Requirements {
 	@SuppressWarnings("unchecked")
 	public static void check(final ActivityBase context) {
 		// Check Android version
-		if (Build.VERSION.SDK_INT != Build.VERSION_CODES.ICE_CREAM_SANDWICH_MR1
-				&& Build.VERSION.SDK_INT != Build.VERSION_CODES.JELLY_BEAN
-				&& Build.VERSION.SDK_INT != Build.VERSION_CODES.JELLY_BEAN_MR1
-				&& Build.VERSION.SDK_INT != Build.VERSION_CODES.JELLY_BEAN_MR2
-				&& Build.VERSION.SDK_INT != Build.VERSION_CODES.KITKAT) {
+		if (Build.VERSION.SDK_INT < Build.VERSION_CODES.ICE_CREAM_SANDWICH_MR1) {
 			AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
 			alertDialogBuilder.setTitle(R.string.app_name);
 			alertDialogBuilder.setMessage(R.string.app_wrongandroid);
@@ -154,20 +150,21 @@ public class Requirements {
 			reportClass(InterfaceAddress.class, context);
 
 		// Check package manager service
-		try {
-			Class<?> clazz = Class.forName("com.android.server.pm.PackageManagerService", false, null);
+		if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP)
 			try {
+				Class<?> clazz = Class.forName("com.android.server.pm.PackageManagerService", false, null);
 				try {
-					clazz.getDeclaredMethod("getPackageUid", String.class, int.class);
-				} catch (NoSuchMethodException ignored) {
-					clazz.getDeclaredMethod("getPackageUid", String.class);
+					try {
+						clazz.getDeclaredMethod("getPackageUid", String.class, int.class);
+					} catch (NoSuchMethodException ignored) {
+						clazz.getDeclaredMethod("getPackageUid", String.class);
+					}
+				} catch (NoSuchMethodException ex) {
+					reportClass(clazz, context);
 				}
-			} catch (NoSuchMethodException ex) {
-				reportClass(clazz, context);
+			} catch (ClassNotFoundException ex) {
+				sendSupportInfo(ex.toString(), context);
 			}
-		} catch (ClassNotFoundException ex) {
-			sendSupportInfo(ex.toString(), context);
-		}
 
 		// Check GPS status
 		if (!checkField(GpsStatus.class, "mSatellites"))

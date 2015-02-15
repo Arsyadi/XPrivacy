@@ -394,6 +394,7 @@
     <string name="system_getInstalledProviders" translatable="false"><![CDATA[<a href="https://developer.android.com/reference/android/appwidget/AppWidgetManager.html#getInstalledProviders()">Google documentation</a>]]></string>
     <string name="system_getInstalledProvidersForProfile" translatable="false"><![CDATA[<a href="https://developer.android.com/reference/android/appwidget/AppWidgetManager.html#getInstalledProvidersForProfile(android.os.UserHandle)">Google documentation</a>]]></string>
     <string name="system_Srv_getInstalledProviders" translatable="false"><![CDATA[<a href="https://developer.android.com/reference/android/appwidget/AppWidgetManager.html#getInstalledProviders()">Google documentation</a>]]></string>
+    <string name="system_Srv_getInstalledProvidersForProfile" translatable="false"><![CDATA[<a href="https://developer.android.com/reference/android/appwidget/AppWidgetManager.html#getInstalledProviders()">Google documentation</a>]]></string>
     <string name="system_getRecentTasks" translatable="false"><![CDATA[<a href="https://developer.android.com/reference/android/app/ActivityManager.html#getRecentTasks(int,%20int)">Google documentation</a>]]></string>
     <string name="system_getRunningAppProcesses" translatable="false"><![CDATA[<a href="https://developer.android.com/reference/android/app/ActivityManager.html#getRunningAppProcesses()">Google documentation</a>]]></string>
     <string name="system_getRunningServices" translatable="false"><![CDATA[<a href="https://developer.android.com/reference/android/app/ActivityManager.html#getRunningServices(int)">Google documentation</a>]]></string>
@@ -428,8 +429,9 @@
     <string name="system_Srv_queryUsageStats" translatable="false"><![CDATA[<a href="https://developer.android.com/reference/android/app/usage/UsageStatsManager.html#queryUsageStats(int, long, long)">Documentation</a>]]></string>
 
     <!-- view -->
-    <string name="view_loadUrl" translatable="false"><![CDATA[Will restrict access to the user agent]]></string>
-    <string name="view_WebView" translatable="false"><![CDATA[Will restrict access to the user agent]]></string>
+    <string name="view_loadUrl" translatable="false"><![CDATA[<a href="https://developer.android.com/reference/android/webkit/WebView.html#loadUrl(java.lang.String)">Google documentation</a>]]></string>
+    <string name="view_postUrl" translatable="false"><![CDATA[<a href="https://developer.android.com/reference/android/webkit/WebView.html#postUrl(java.lang.String,%20byte[])">Google documentation</a>]]></string>
+    <string name="view_initUserAgentString" translatable="false"><![CDATA[Will restrict access to the user agent string]]></string>
     <string name="view_getDefaultUserAgent" translatable="false"><![CDATA[<a href="https://developer.android.com/reference/android/webkit/WebSettings.html#getDefaultUserAgent(android.content.Context)">Google documentation</a>]]></string>
     <string name="view_getUserAgent" translatable="false"><![CDATA[<a href="https://developer.android.com/reference/android/webkit/WebSettings.html#getUserAgentString()">Google documentation</a>]]></string>
     <string name="view_getUserAgentString" translatable="false"><![CDATA[<a href="https://developer.android.com/reference/android/webkit/WebSettings.html#getUserAgentString()">Google documentation</a>]]></string>

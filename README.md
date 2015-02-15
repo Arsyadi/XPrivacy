@@ -71,7 +71,7 @@ Depending on the function, XPrivacy skips execution of the original function
 (for example when an application tries to set a proximity alert)
 or alters the result of the original function (for example to return an empty message list).
 
-XPrivacy has been tested with Android version 4.0.3 - 4.4.4 (ICS, JellyBean, KitKat),
+XPrivacy has been tested with Android version 4.0.3 - 5.0.2 (ICS, JellyBean, KitKat, Lollipop),
 and is reported to work with most Android variants, including stock ROMs.
 Root access is needed to install the Xposed framework.
 
@@ -111,7 +111,7 @@ Features
 
 * Simple to use
 * No need to patch anything (no source, no [smali](https://code.google.com/p/smali/) or anything else)
-* For any (stock) variant of Android version 4.0.3 - 4.4.4 (ICS, JellyBean, KitKat)
+* For any (stock) variant of Android version 4.0.3 - 5.0.2 (ICS, JellyBean, KitKat, Lollipop)
 * Newly installed applications are restricted by default
 * Displays data actually used by an application
 * Option to restrict on demand
@@ -352,10 +352,8 @@ You can still restrict the XPrivacy app's access to accounts, contacts, and othe
 Compatibility
 -------------
 
-XPrivacy has been tested with Android version 4.0.3 - 4.4.4 (ICS, JellyBean, KitKat)
+XPrivacy has been tested with Android version 4.0.3 - 5.0.2 (ICS, JellyBean, KitKat, Lollipop)
 and is reported to work with most Android variants, including stock ROMs.
-
-Android 5.0 (Lollipop) support [is in development](https://github.com/M66B/XPrivacy/issues/1757), see also [this FAQ](#FAQ75).
 
 **XPrivacy is incompatible with LBE Security Master** ([issue](https://github.com/M66B/XPrivacy/issues/1231)).
 
@@ -365,17 +363,32 @@ See [here](http://forum.xda-developers.com/showpost.php?p=55810186&postcount=121
 You need to use the quirk "noresolve" when using [GoPro](https://play.google.com/store/apps/details?id=com.gopro.smarty)
 and some other wireless camera's, like the Sony QX1/10/30/100 ([issue](https://github.com/M66B/XPrivacy/issues/1751)).
 
+Candy Crush is known to crash on some ROMs, see [here](http://forum.xda-developers.com/showpost.php?p=58722199&postcount=13666).
+
 Installation
 ------------
 
-**Instead of following the steps below, you can use the [XPrivacy Installer](https://play.google.com/store/apps/details?id=biz.bokhorst.xprivacy.installer).**
+**Instead of following the steps below, you can use the [XPrivacy Installer](https://play.google.com/store/apps/details?id=biz.bokhorst.xprivacy.installer), except for Android 5.x - Lollipop.**
 
 Installation may seem lengthy, but you can actually do it quickly:
 
 1. Requirements:
-	* Android version 4.0.3 - 4.4.4 (ICS, JellyBean, KitKat); check with *System Settings* > *About phone* > *Android version*
+	* Android version 4.0.3 - 5.0.2 (ICS, JellyBean, KitKat, Lollipop); check with *System Settings* > *About phone* > *Android version*
 	* Read about [compatibility](#compatibility) before installing
 1. **Make a backup**
+1. For Android 5.x (Lollipop):
+	* **This is not optional, unless you are using a custom ROM/kernel with SELinux disabled or in permissive mode!**
+		* Note that applications to set SELinux to permissive mode will probably not work, since this is probably done too late in the boot process
+	* You need to be able to flash a kernel image
+		* Mostly this means the bootloader needs to be unlocked
+	* You need to have/obtain a kernel image (boot.img) for your device
+	* Edit the kernel image and add this line as the second to last to the file *ramdisk/service_contexts* (before the blank line):
+		* *xprivacy453 u:object_r:system_server_service:s0*
+		* You can do this with for example [Android Image Kitchen](http://forum.xda-developers.com/showthread.php?t=2073775)
+		* Make sure you preserve the Linux line endings of the file
+		* My advice is to use [Geany](http://www.geany.org/) to edit the file
+	* Flash the edited kernel image
+		* Mostly this is done using the [fastboot](http://forum.xda-developers.com/showthread.php?t=2277112) command
 1. If you haven't already, root your device; the rooting procedure depends on your device's brand and model.
 	* You can find a guide [here](http://www.androidcentral.com/root) for most devices
 1. Enable *System settings* > *Security* > *Unknown sources*
@@ -926,6 +939,7 @@ IMHO you should at least install an ad blocker and a firewall.
 * [CrappaLinks](http://forum.xda-developers.com/showthread.php?t=2603868) ([source code](https://github.com/GermainZ/CrappaLinks))
 * [PlayPermissionsExposed](http://forum.xda-developers.com/xposed/modules/playpermissionsexposed-fix-play-store-t2783076) ([source code](https://github.com/GermainZ/PlayPermissionsExposed))
 * [Xabber](https://play.google.com/store/apps/details?id=com.xabber.android) ([source code](https://github.com/redsolution/xabber-android))
+* [Wi-Fi Privacy Police](https://play.google.com/store/apps/details?id=be.uhasselt.privacypolice)
 
 Please note that these applications are not written by me
 and that you should contact the author for support questions.
@@ -942,8 +956,6 @@ I have really spent a lot of time developing XPrivacy and I am happy to look int
 but I am asking you to properly document your issue.
 *It doesn't work* or *it crashes* is insufficient.
 So, please describe the exact steps to reproduce the problem and/or provide a logcat.
-
-If you requested a new feature: there is a feature stop since version 2.x.
 
 See [here](#support) for more details.
 
@@ -1284,6 +1296,19 @@ Please read [here](http://forum.xda-developers.com/xposed/modules/xprivacy-ultim
 If your device doesn't have an SD-card, you will need to put the license file into the root folder of the external storage folder.
 This is the folder you will see if you connect your device to a PC. When in doubt, you can use the menu *Help*, *About* to see the correct folder name.
 
+<a name="FAQ78"></a>
+**(78) I get "The Play store says not licensed" when I tried to fetch a license**
+
+This message basically means that the Play stores thinks you didn't pay for the [pro license fetcher](https://play.google.com/store/apps/details?id=biz.bokhorst.xprivacy.license).
+
+Please make sure you are using the original Play store application and that the Play store and the Play services have internet access (mind firewall applications).
+Make sure you are not using *Lucky Patcher*, *Freedom* or similar applications.
+Also make sure you didn't restrict the Play store, the Play services and the pro license fetcher using XPrivacy.
+
+Start the Play store and wait a minute or so, so that the Play store can synchronize with the Google servers.
+
+Try to fetch a license again. If you keep having this problem, please contact me (again).
+
 Support
 -------
 
@@ -1325,7 +1350,9 @@ and include information about your device type, Android and XPrivacy version.
 To increase the chance I can find and fix the bug, please read [this](http://www.chiark.greenend.org.uk/~sgtatham/bugs.html).
 
 Include a [logcat](#FAQ14) when relevant (use [gist](https://gist.github.com/) or a similar service).
-Try to keep the logcat as brief as possible, searching in large logcats is no fun and not useful.
+Try to keep the logcat as brief as possible, include just the crash/problem and a few dozen lines around it.
+I have looked into a lot of long logcats in the past, too often without any result.
+Therefore I will not look into long logcats anymore.
 
 **One bug report per issue please!**
 
@@ -1355,6 +1382,8 @@ Please read [here](http://forum.xda-developers.com/xposed/modules/xprivacy-ultim
 If you have any question, please leave a message in the [XDA XPrivacy forum thread](http://forum.xda-developers.com/showthread.php?p=42488236).
 More people are following the support forum than the GitHub issue tracker, which increases your chance to get a helpful answer.
 Moreover, the answers given might be beneficial to more people than you alone.
+
+For question about Xposed you should use [this XDA forum](http://forum.xda-developers.com/xposed).
 
 **Please do not ask questions on GitHub!**
 

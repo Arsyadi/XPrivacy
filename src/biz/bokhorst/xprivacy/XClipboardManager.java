@@ -3,6 +3,8 @@ package biz.bokhorst.xprivacy;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.os.Build;
+
 public class XClipboardManager extends XHook {
 	private Methods mMethod;
 	private String mClassName;
@@ -11,7 +13,10 @@ public class XClipboardManager extends XHook {
 	private XClipboardManager(Methods method, String restrictionName) {
 		super(restrictionName, method.name().replace("Srv_", ""), method.name());
 		mMethod = method;
-		mClassName = "com.android.server.ClipboardService";
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
+			mClassName = "com.android.server.clipboard.ClipboardService";
+		else
+			mClassName = "com.android.server.ClipboardService";
 	}
 
 	private XClipboardManager(Methods method, String restrictionName, String className) {
@@ -57,7 +62,7 @@ public class XClipboardManager extends XHook {
 	};
 	// @formatter:on
 
-	public static List<XHook> getInstances(String className) {
+	public static List<XHook> getInstances(String className, boolean server) {
 		List<XHook> listHook = new ArrayList<XHook>();
 		if (!cClassName.equals(className)) {
 			if (className == null)
@@ -65,10 +70,11 @@ public class XClipboardManager extends XHook {
 
 			for (Methods clip : Methods.values())
 				if (clip.name().startsWith("Srv_")) {
-					if (clip == Methods.Srv_removePrimaryClipChangedListener)
-						listHook.add(new XClipboardManager(clip, null));
-					else
-						listHook.add(new XClipboardManager(clip, PrivacyManager.cClipboard));
+					if (server)
+						if (clip == Methods.Srv_removePrimaryClipChangedListener)
+							listHook.add(new XClipboardManager(clip, null));
+						else
+							listHook.add(new XClipboardManager(clip, PrivacyManager.cClipboard));
 				} else {
 					if (clip == Methods.removePrimaryClipChangedListener)
 						listHook.add(new XClipboardManager(clip, null, className));
