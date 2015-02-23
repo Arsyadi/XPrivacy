@@ -389,6 +389,8 @@ Installation may seem lengthy, but you can actually do it quickly:
 		* My advice is to use [Geany](http://www.geany.org/) to edit the file
 	* Flash the edited kernel image
 		* Mostly this is done using the [fastboot](http://forum.xda-developers.com/showthread.php?t=2277112) command
+	* Download the latest release of XPrivacy [here](https://github.com/M66B/XPrivacy/releases)
+		* **The releases in the Xposed repository do not work on Android 5.x (Lollipop)**
 1. If you haven't already, root your device; the rooting procedure depends on your device's brand and model.
 	* You can find a guide [here](http://www.androidcentral.com/root) for most devices
 1. Enable *System settings* > *Security* > *Unknown sources*
@@ -1308,6 +1310,16 @@ Also make sure you didn't restrict the Play store, the Play services and the pro
 Start the Play store and wait a minute or so, so that the Play store can synchronize with the Google servers.
 
 Try to fetch a license again. If you keep having this problem, please contact me (again).
+
+<a name="FAQ79"></a>
+**(79) How can I disable restrictions at boot (experts only)**
+
+By creating this file:
+
+*/data/system/xprivacy/disabled*
+
+Each line should either contain a category name or a category name and function name separated by a slash (/).
+See [here](https://github.com/M66B/XPrivacy/blob/master/src/biz/bokhorst/xprivacy/Meta.java#L47) for the correct category and function names.
 
 Support
 -------
